@@ -6,14 +6,6 @@ root.title("Text Editor")
 root.geometry("1000x450")
 root.aspect(20, 9, 20, 9)
 
-menu_bar = tk.Menu(root)
-root.config(menu=menu_bar)
-file_menu = tk.Menu(menu_bar, tearoff=0)
-menu_bar.add_cascade(label="File", menu=file_menu)
-file_menu.add_command(label="New")
-file_menu.add_command(label="Open")
-file_menu.add_command(label="Save")
-
 def on_save_button_click():
     retrieved_text = text_area.get("1.0", "end-1c")
     with open("file.txt", "w") as file:
@@ -29,5 +21,14 @@ text_area = tk.Text(
     pady=10
 )
 text_area.pack(side=tk.RIGHT, expand=True, fill=tk.BOTH)
+
+save_button = tk.Button(
+    root,
+    text="Save",
+    command=on_save_button_click,
+    bg="#007acc",
+    fg="black"
+)
+save_button.pack(pady=5)
 
 root.mainloop()
