@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
+from tkinter import filedialog
+from tkinter import simpledialog
 
 root = tk.Tk()
 root.title("Text Editor")
@@ -8,18 +10,23 @@ root.geometry("1000x450")
 root.aspect(20, 9, 20, 9)
 
 def on_closing():
-    # Quick pop-up asking if they want to exit
     if messagebox.askokcancel("Quit", "Do you want to quit? Make sure you saved!"):
         root.destroy()
 
 def on_save_button_click():
     retrieved_text = text_area.get("1.0", "end-1c")
-    wsave = str(input("Where to save? (TXT FILE): "))
-    with open(f"{wsave}.txt", "w") as file:
+    wsave = filedialog.asksaveasfilename(
+        defaultextension=".txt",
+        filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")]
+    )
+    with open(wsave, "w") as file:
         file.write(retrieved_text)
 def on_new_button_click():
-    name = str(input("Name of the file? (WILL CREATE A TXT FILE): "))
+    if messagebox.askyesno("New File", "Are you sure you want to create a new file?"):
+        text_area.delete("1.0", tk.END)
+    name = simpledialog.askstring("New File", "Name of the file? (creates a .txt file):")
     f = open(f"{name}.txt", "x")
+
 text_area = tk.Text(
     root,
     wrap=tk.WORD,
