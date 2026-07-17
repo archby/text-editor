@@ -64,8 +64,8 @@ def on_open_button_click():
 text_area = tk.Text(
     root,
     wrap=tk.WORD,
-    bg="#1e1e1e",
-    fg="#d4d4d4",
+    bg="#d4d4d4",
+    fg="#1e1e1e",
     insertbackground="white",
     font=("Courier", 12),
     padx=10,
