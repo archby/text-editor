@@ -8,8 +8,12 @@ root.aspect(20, 9, 20, 9)
 
 def on_save_button_click():
     retrieved_text = text_area.get("1.0", "end-1c")
-    with open("file.txt", "w") as file:
+    wsave = str(input("Where to save? (TXT FILE): "))
+    with open(f"{wsave}.txt", "w") as file:
         file.write(retrieved_text)
+def on_new_button_click():
+    name = str(input("Name of the file? (WILL CREATE A TXT FILE): "))
+    f = open(f"{name}.txt", "x")
 text_area = tk.Text(
     root,
     wrap=tk.WORD,
@@ -21,6 +25,7 @@ text_area = tk.Text(
     pady=10
 )
 text_area.pack(side=tk.RIGHT, expand=True, fill=tk.BOTH)
+text_area.insert("1.0", "Type anything...")
 
 save_button = tk.Button(
     root,
@@ -30,5 +35,15 @@ save_button = tk.Button(
     fg="black"
 )
 save_button.pack(pady=5)
+
+new_button = tk.Button(
+    root,
+    text="New",
+    command=on_new_button_click,
+    bg="#007acc",
+    fg="black"
+)
+
+new_button.pack(pady=5)
 
 root.mainloop()
