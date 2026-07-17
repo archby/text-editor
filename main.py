@@ -14,6 +14,10 @@ file_menu.add_command(label="New")
 file_menu.add_command(label="Open")
 file_menu.add_command(label="Save")
 
+def on_save_button_click():
+    retrieved_text = text_area.get("1.0", "end-1c")
+    with open("file.txt", "w") as file:
+        file.write(retrieved_text)
 text_area = tk.Text(
     root,
     wrap=tk.WORD,
