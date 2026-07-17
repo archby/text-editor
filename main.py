@@ -1,10 +1,16 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 
 root = tk.Tk()
 root.title("Text Editor")
 root.geometry("1000x450")
 root.aspect(20, 9, 20, 9)
+
+def on_closing():
+    # Quick pop-up asking if they want to exit
+    if messagebox.askokcancel("Quit", "Do you want to quit? Make sure you saved!"):
+        root.destroy()
 
 def on_save_button_click():
     retrieved_text = text_area.get("1.0", "end-1c")
@@ -46,4 +52,5 @@ new_button = tk.Button(
 
 new_button.pack(pady=5)
 
+root.protocol("WM_DELETE_WINDOW", on_closing)
 root.mainloop()
